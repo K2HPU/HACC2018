@@ -1,0 +1,12 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
+  "solution": {
+    "name": "match-maker-client-side-solution",
+    "id": "fb9111d2-909b-4107-b249-fd23902ed788",
+    "version": "1.0.0.0",
+    "includeClientSideAssets": true
+  },
+  "paths": {
+    "zippedPackage": "solution/match-maker.sppkg"
+  }
+}
