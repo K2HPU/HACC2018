@@ -3,7 +3,9 @@ import {
   Environment,  
   EnvironmentType  
 } from '@microsoft/sp-core-library';
+
 import { Version } from '@microsoft/sp-core-library';
+
 import {
   BaseClientSideWebPart,
   IPropertyPaneConfiguration,
@@ -29,9 +31,10 @@ export interface ISPLists {
 }  
 export interface ISPList {  
   Title: string;  
-  ResourceType: string;  
-  SubjectArea: string;  
-  TargetAudience: string;  
+  Resource_x0020_Type: string;  
+  Subject_x0020_Area: string;  
+  Target_x0020_Audience: string;
+  Description: string;  
 }    
 
 export default class MatchMakerWebPart extends BaseClientSideWebPart<IMatchMakerWebPartProps> {
@@ -42,9 +45,9 @@ export default class MatchMakerWebPart extends BaseClientSideWebPart<IMatchMaker
         const listData: ISPLists = {  
             value:  
             [  
-                { Title: 'FileName1', ResourceType: 'Lesson Plan', SubjectArea: 'Math', TargetAudience: '1stGrade' },  
-                 { Title: 'FileName2', ResourceType: 'Instructions', SubjectArea: 'English', TargetAudience: '2ndGrade' },  
-                { Title: 'FileName3', ResourceType: 'Field Trip', SubjectArea: 'Science', TargetAudience: '3rdGrade' }  
+                { Title: 'FileName1', Resource_x0020_Type: 'Lesson Plan', Subject_x0020_Area: 'Math', Target_x0020_Audience: '1stGrade', Description: '1' },  
+                { Title: 'FileName2', Resource_x0020_Type: 'Instructions', Subject_x0020_Area: 'English', Target_x0020_Audience: '2ndGrade', Description: '1' },  
+                { Title: 'FileName3', Resource_x0020_Type: 'Field Trip', Subject_x0020_Area: 'Science', Target_x0020_Audience: '3rdGrade', Description: '1'  }  
             ]  
             };  
         return listData;  
@@ -52,7 +55,7 @@ export default class MatchMakerWebPart extends BaseClientSideWebPart<IMatchMaker
 } 
 //Added this method to get SharePoint list items, using REST API
   private _getListData(): Promise<ISPLists> {  
-    return this.context.spHttpClient.get(this.context.pageContext.web.absoluteUrl + `/_api/web/lists/GetByTitle('Main Repository')/Items`, SPHttpClient.configurations.v1)  
+    return this.context.spHttpClient.get(`https://ksbetest.sharepoint.com/sites/dev/ociss/_api/web/lists/GetByTitle('Main Repository')/Items`, SPHttpClient.configurations.v1)  
         .then((response: SPHttpClientResponse) => {   
           debugger;  
           return response.json();  
@@ -77,14 +80,15 @@ export default class MatchMakerWebPart extends BaseClientSideWebPart<IMatchMaker
   //add this method to create HTML table out of the retrieved SharePoint list items
   private _renderList(items: ISPList[]): void {  
     let html: string = '<table class="TFtable" border=1 width=100% style="border-collapse: collapse;">';  
-    html += `<th>Title</th><th>ResourceType</th><th>SubjectArea</th><th>TargetAudience</th>`;  
+    html += `<th>Title</th><th>Resource Type</th><th>Subject Area</th><th>Target Audience</th><th>Description</th>`;  
     items.forEach((item: ISPList) => {  
       html += `  
            <tr>  
           <td>${item.Title}</td>  
-          <td>${item.ResourceType}</td>  
-          <td>${item.SubjectArea}</td>  
-          <td>${item.TargetAudience}</td>  
+          <td>${item.Resource_x0020_Type}</td>  
+          <td>${item.Subject_x0020_Area}</td>  
+          <td>${item.Target_x0020_Audience}</td>  
+          <td>${item.Description}</td>  
           </tr>  
           `;  
     });  
