@@ -60,6 +60,15 @@ export default class MatchMakerWebPart extends BaseClientSideWebPart<IMatchMaker
         return listData;  
     }) as Promise<ISPLists>;  
 } 
+
+// private _getUserData(): Promise<IUser> {  
+//   return this.context.spHttpClient.get(`https://ksbetest.sharepoint.com/sites/dev/ociss/_api/web/lists/GetByTitle('Main Repository')/Items`, SPHttpClient.configurations.v1)  
+//       .then((response: SPHttpClientResponse) => {   
+//         debugger;  
+//         return response.json();  
+//       });  
+//     } 
+
 //Added this method to get SharePoint list items, using REST API
   private _getListData(): Promise<ISPLists> {  
     return this.context.spHttpClient.get(`https://ksbetest.sharepoint.com/sites/dev/ociss/_api/web/lists/GetByTitle('Main Repository')/Items`, SPHttpClient.configurations.v1)  
@@ -130,12 +139,13 @@ export default class MatchMakerWebPart extends BaseClientSideWebPart<IMatchMaker
     //     });          
     // });
 
+
     this.domElement.innerHTML = `  
     <div class="${styles.matchMaker}">  
     <div class="${styles.container}">  
       <div class="ms-Grid-row ms-bgColor-themeDark ms-fontColor-white ${styles.row}">  
         <div class="ms-Grid-col ms-u-lg10 ms-u-xl8 ms-u-xlPush2 ms-u-lgPush1">  
-          <span class="ms-font-xl ms-fontColor-white" style="font-size:28px">Welcome to SharePoint Framework Development</span>  
+          <span class="ms-font-xl ms-fontColor-white" style="font-size:28px">G5 MatchMaker App</span>  
             
           <p class="ms-font-l ms-fontColor-white" style="text-align: center">Demo : Retrieve Main Repository Data from SharePoint List</p>  
         </div>  
