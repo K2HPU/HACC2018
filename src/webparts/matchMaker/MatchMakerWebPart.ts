@@ -96,6 +96,7 @@ export default class MatchMakerWebPart extends BaseClientSideWebPart<IMatchMaker
     const listContainer: Element = this.domElement.querySelector('#spListContainer');  
     listContainer.innerHTML = html;  
   } 
+
   
   //Replace Render method to enable rendering of the list items  
   public render(): void {  
